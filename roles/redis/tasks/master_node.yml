@@ -1,0 +1,6 @@
+---
+  - name: 设置redis节点加入集群脚本
+    template: src=redis_join_cluster.sh.j2 dest={{redis_deposit_path}}/{{redis_file_name}}/src/redis_join_cluster.sh  owner=root group=root mode=0777
+
+  - name: 执行redis节点加入集群脚本
+    shell: sh redis_join_cluster.sh chdir={{redis_deposit_path}}/{{redis_file_name}}/src

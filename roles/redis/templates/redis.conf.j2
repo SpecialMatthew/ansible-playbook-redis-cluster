@@ -1,0 +1,18 @@
+# 需要不同的服务器进行节点的联通，就不能设为127.0.0.1
+bind {{hostvars[inventory_hostname]['ansible_ssh_host']}}
+# 需要不同的服务器进行节点的联通，就不能设为yes
+protected-mode no
+# 设置后台运行redis
+daemonize yes
+# 开启集群
+cluster-enabled yes
+# 设置请求超时时间，默认为15秒，可以自行修改
+cluster-node-timeout 15000
+# aop日志开启，会每次进行写操作都记录一条日志
+appendonly yes
+# 根据不同的端口需要设置的地方
+Port {{redis_port}}（默认为6379，可以不用修改）
+cluster-config-file nodes_{{redis_port}}.conf
+# 开启redis事件通知
+notify-keyspace-events Egx
+

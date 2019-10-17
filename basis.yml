@@ -1,0 +1,13 @@
+---
+#redis模块
+  - name: 安装redis集群
+    hosts: redis-cluster
+    remote_user: root
+    roles:
+       - { role: redis, tags: "redis-install", deploy: "all_node" }
+
+  - name: 执redis集群命令
+    hosts: redis-cluster[0]
+    remote_user: root
+    roles:
+       - { role: redis, tags: "redis-cluster", deploy: "master_node" }

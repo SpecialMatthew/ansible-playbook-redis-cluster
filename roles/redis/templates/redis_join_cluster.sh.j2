@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+cd {{redis_deposit_path}}/{{redis_file_name}}/src
+yes 'yes' |./redis-cli --cluster  create  --cluster-replicas 1  {% for host in groups["redis-cluster"] %} {{ hostvars[host]['ansible_ssh_host'] }}:{{redis_port}}  {% endfor %}
+

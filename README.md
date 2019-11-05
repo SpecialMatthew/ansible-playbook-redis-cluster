@@ -34,3 +34,23 @@ Repeatedly output a line with all specified STRING(s), or 'y'.
 
 ./redis-cli -c -h {ip}  -p  {port}  cluster nodes即可查看集群状态
 
+
+查看主从节点关系
+./redis-cli -h 192.168.114.241 -p 6379 -c cluster slots | xargs -n8 | awk '{print $3":"$4"->"$6":"$7}' | sort -nk2 -t ':' | uniq
+
+
+新增哨兵配置，用来监控主节点的状态，如主节点挂掉了，通过哨兵的投票机制，使备机自动更换成master节点，当之前的master节点重启后，将会自动成为slave节点。
+
+
+此工程的哨兵配置，不是高可用配置。如要做到高可用配置，则需在增加6个节点。增加的节点上跑redis-sentinel服务， 这样每个主节点就有三个哨兵监控。
+
+同时需要将sentine.conf中的投票参数设置为2，使超过2个哨兵投则判断主节点挂掉了。参数为下面的quorum
+
+sentinel monitor <master-name> <ip> <redis-port> <quorum>  
+
+
+
+
+
+
+

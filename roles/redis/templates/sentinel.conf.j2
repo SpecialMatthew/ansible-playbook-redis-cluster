@@ -1,0 +1,26 @@
+# 修改启动端口
+port {{redis_sentinel_port}}
+
+# 添加守护进程模式
+daemonize yes
+
+# 添加关闭保护模式
+protected-mode no
+
+# pidfile的文件路径
+pidfile /var/run/redis-sentinel_{{redis_sentinel_port}}.pid
+
+# 日志文件路径
+logfile "{{redis_deposit_path}}/{{redis_file_name}}/log/redis_{{redis_sentinel_port}}.log"
+
+#sentinel monitor <master-name> <ip> <redis-port> <quorum>
+#告诉sentinel去监听地址为ip:port的一个master，这里的master-name可以自定义，quorum是一个数字，指明当有多少个sentinel认为一个master失效时，master才算真正失效
+sentinel monitor mymaster {{hostvars[inventory_hostname]['redis_matster_host']}} {{redis_port}} 1
+
+#sentinel down-after-milliseconds <master-name> <milliseconds> 
+#这个配置项指定了需要多少失效时间，一个master才会被这个sentinel主观地认为是不可用的。 单位是毫秒，默认为30秒（这里设置为60秒）
+sentinel down-after-milliseconds mymaster 60000
+
+#sentinel parallel-syncs <master-name> <numslaves> 
+#这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行 同步，这个数字越小，完成failover所需的时间就越长，但是如果这个数字越大，就意味着越 #多的slave因为replication而不可用。可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。
+sentinel parallel-syncs mymaster 1

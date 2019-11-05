@@ -1,0 +1,6 @@
+---
+  - name: 修改redis-sentinel配置文件
+    template: src=sentinel.conf.j2 dest={{redis_deposit_path}}/{{redis_file_name}}/sentinel.conf owner=root group=root mode=0644   
+
+  - name: 启动redis-sentinel服务
+    shell: ./redis-sentinel ../sentinel.conf  chdir={{redis_deposit_path}}/{{redis_file_name}}/src

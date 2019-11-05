@@ -6,3 +6,8 @@ cdh3.dmudb.dameng.com  ansible_ssh_host=192.168.114.243 ansible_user=root ansibl
 cdh4.dmudb.dameng.com  ansible_ssh_host=192.168.114.244 ansible_user=root ansible_ssh_pass=dameng777
 cdh5.dmudb.dameng.com  ansible_ssh_host=192.168.114.245 ansible_user=root ansible_ssh_pass=dameng777
 cdh6.dmudb.dameng.com  ansible_ssh_host=192.168.114.246 ansible_user=root ansible_ssh_pass=dameng777
+
+[redis-sentinel]
+cdh4.dmudb.dameng.com  redis_matster_host=192.168.114.241
+cdh5.dmudb.dameng.com  redis_matster_host=192.168.114.242
+cdh6.dmudb.dameng.com  redis_matster_host=192.168.114.243

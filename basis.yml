@@ -11,3 +11,9 @@
     remote_user: root
     roles:
        - { role: redis, tags: "redis-cluster", deploy: "master_node" }
+
+  - name: 配置redis-sentinel
+    hosts: redis-sentinel
+    remote_user: root
+    roles:
+       - { role: redis, tags: "redis-sentinel", deploy: "sentinel_node" }

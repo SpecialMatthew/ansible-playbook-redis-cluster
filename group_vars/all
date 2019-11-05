@@ -2,3 +2,4 @@ redis_deposit_path: /root/ansible-redis
 redis_package_name: redis-5.0.5.tar.gz
 redis_file_name: redis-5.0.5
 redis_port: 6379
+redis_sentinel_port: 26379

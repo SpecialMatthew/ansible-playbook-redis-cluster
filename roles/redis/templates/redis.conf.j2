@@ -15,4 +15,6 @@ Port {{redis_port}}（默认为6379，可以不用修改）
 cluster-config-file nodes_{{redis_port}}.conf
 # 开启redis事件通知
 notify-keyspace-events Egx
+# reids日志文件路径
+logfile "{{redis_deposit_path}}/{{redis_file_name}}/log/redis_{{redis_port}}.log"
 

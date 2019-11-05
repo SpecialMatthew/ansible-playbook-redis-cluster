@@ -1,6 +1,9 @@
 ---
   - name: 创建redis存放路径
     file: path={{redis_deposit_path}} state=directory mode=0755
+
+  - name: 创建redis的日志存放路径
+    file: path={{redis_deposit_path}}/{{redis_file_name}}/log state=directory mode=0755  
   
   - name: 解压redis
     unarchive: src={{redis_package_name}} dest={{redis_deposit_path}}/

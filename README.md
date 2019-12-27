@@ -1,11 +1,11 @@
 # ansible-playbook-redis-cluster
 
-执行这个ansible脚本之前需要先安装好ansible。这里修改了ansible.cfg文件中的inventory参数，使得执行脚本时不需要在/etc/ansible下去执行。可以直接在其他的
+执行这个ansible脚本之前需要先安装好ansible。这里修改了ansible.cfg文件中的inventory参数，使得执行脚本时不需要在`/etc/ansible`下去执行。可以直接在其他的
 
 文件夹中去执行，但是这个文件夹得包含ansible.cfg这个文件。
 
-hosts为远程控制机器的配置文件。
-basis.yml为脚本的入口   执行脚本时  ansible-playbook  basis.yml   即可
+`hosts`为远程控制机器的配置文件。
+`basis.yml`为脚本的入口   执行脚本时  ansible-playbook  basis.yml   即可
 
 group_vars里面的all文件  是配置全局变量的文件，脚本中所有的变量都可以在里面设置
 
@@ -25,7 +25,7 @@ template中主主要是配置文件的模板文件和脚本的模板文件 都�
 Jinja2是基于python的模板语言，所以使用python的语法就可以编写
 
 
-
+# 在添加节点到集群时，自动输入yes选项
 yes [字符串]...  用法参考/roles/redis/template/redis_join_cluster.sh.j2
 
 Repeatedly output a line with all specified STRING(s), or 'y'.
@@ -35,7 +35,7 @@ Repeatedly output a line with all specified STRING(s), or 'y'.
 ./redis-cli -c -h {ip}  -p  {port}  cluster nodes即可查看集群状态
 
 
-查看主从节点关系
+# 查看主从节点关系
 ./redis-cli -h 192.168.114.241 -p 6379 -c cluster slots | xargs -n8 | awk '{print $3":"$4"->"$6":"$7}' | sort -nk2 -t ':' | uniq
 
 
